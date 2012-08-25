@@ -76,6 +76,21 @@ Ext.override(Ext.form.BasicForm,{
     }
 });
 
+/**
+ * CodeArea basic implementation
+ */
+MODx.form.CodeArea = Ext.extend(Ext.form.TextArea,  {
+    mimeType: 'text/plain'
+});
+Ext.reg('modx-codearea',MODx.form.CodeArea);
+
+/**
+ * HtmlEditor basic implementation
+ */
+MODx.form.HtmlEditor = Ext.extend(Ext.form.TextArea,  {
+    
+});
+Ext.reg('modx-htmleditor',MODx.form.HtmlEditor);
 
 /** 
  * Static Textfield
