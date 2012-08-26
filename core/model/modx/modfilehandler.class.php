@@ -479,6 +479,23 @@ class modFile extends modFileSystemResource {
     }
 
     /**
+     * Gets the MIME type
+     *
+     * @return string The MIME type of the file
+     */
+    public function getMimeType() {
+        $result = 'application/octet-stream';
+        if (function_exists('finfo_open')) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $result = finfo_file($finfo, $this->path);
+            finfo_close($finfo);
+        } elseif (function_exists('mime_content_type')) {
+            $result = mime_content_type($this->path);
+        }
+        return $result;
+    }
+
+    /**
      * Deletes the file from the filesystem
      *
      * @return boolean True if successful
