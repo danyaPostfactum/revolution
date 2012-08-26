@@ -487,7 +487,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         }
         $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
         $imageExtensions = explode(',',$imageExtensions);
-        $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
+        $fileExtension = $file->getExtension();
 
         $fa = array(
             'name' => $objectPath,
@@ -500,6 +500,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             'image' => in_array($fileExtension,$imageExtensions) ? true : false,
             'is_writable' => $file->isWritable(),
             'is_readable' => $file->isReadable(),
+            'mime_type' => $file->getMimeType(),
         );
         return $fa;
     }
