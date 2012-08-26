@@ -215,6 +215,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                         ,path: node.attributes.pathRelative
                         ,source: this.getSource()
                         ,content: response.object.content
+                        ,mime_type: response.object.mime_type
                     };
                     var w = MODx.load({
                         xtype: 'modx-window-file-quick-update'
@@ -706,10 +707,11 @@ MODx.window.QuickUpdateFile = function(config) {
             ,anchor: '100%'
         },{
             fieldLabel: _('content')
-            ,xtype: 'textarea'
+            ,xtype: 'modx-codearea'
             ,name: 'content'
             ,anchor: '100%'
             ,grow: true, growMax: 380
+            ,mimeType: config.record.mime_type
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -772,10 +774,11 @@ MODx.window.QuickCreateFile = function(config) {
             ,allowBlank: false
         },{
             fieldLabel: _('content')
-            ,xtype: 'textarea'
+            ,xtype: 'modx-codearea'
             ,name: 'content'
             ,anchor: '100%'
             ,grow: true, growMax: 380
+            ,mimeType: 'text/plain'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER

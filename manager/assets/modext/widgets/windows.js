@@ -216,12 +216,13 @@ MODx.window.QuickCreateChunk = function(config) {
             ,anchor: '100%'
             ,rows: 2
         },{
-            xtype: 'textarea'
+            xtype: 'modx-codearea'
             ,name: 'snippet'
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true, growMax: 380
+            ,mimeType: 'text/html'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -276,12 +277,13 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,inputValue: 1
             ,checked: true
         },{
-            xtype: 'textarea'
+            xtype: 'modx-codearea'
             ,name: 'snippet'
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,mimeType: 'text/html'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -337,13 +339,14 @@ MODx.window.QuickCreateTemplate = function(config) {
             ,anchor: '100%'
             ,rows: 2
         },{
-            xtype: 'textarea'
+            xtype: 'modx-codearea'
             ,name: 'content'
             ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true
             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,mimeType: 'text/html'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -390,13 +393,14 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,anchor: '100%'
             ,rows: 2
         },{
-            xtype: 'textarea'
+            xtype: 'modx-codearea'
             ,name: 'content'
             ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true
             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,mimeType: 'text/html'
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
@@ -462,13 +466,14 @@ MODx.window.QuickCreateSnippet = function(config) {
             ,anchor: '100%'
             ,rows: 2
         },{
-            xtype: 'textarea'
+            xtype: 'modx-codearea'
             ,name: 'snippet'
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true
             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,mimeType: 'application/x-php'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -515,13 +520,14 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,anchor: '100%'
             ,rows: 2
         },{
-            xtype: 'textarea'
+            xtype: 'modx-codearea'
             ,name: 'snippet'
             ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true
             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,mimeType: 'application/x-php'
         },{
             xtype: 'xcheckbox'
             ,name: 'clearCache'
@@ -595,13 +601,14 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,inputValue: 1
             ,checked: false
         },{
-            xtype: 'textarea'
+            xtype: 'modx-codearea'
             ,name: 'plugincode'
             ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true
             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,mimeType: 'application/x-php'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -665,13 +672,14 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,inputValue: 1
             ,checked: true
         },{
-            xtype: 'textarea'
+            xtype: 'modx-codearea'
             ,name: 'plugincode'
             ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
             ,anchor: '100%'
             ,grow: true
             ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
+            ,mimeType: 'application/x-php'
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER

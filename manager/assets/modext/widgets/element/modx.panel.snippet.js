@@ -189,19 +189,20 @@ MODx.panel.Snippet = function(config) {
                     }]
                 }]
             },{
-				xtype: 'panel'
-				,border: false
-				,layout: 'form'
-				,cls:'main-wrapper'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,fieldLabel: _('snippet_code')
-					,name: 'snippet'
-					,id: 'modx-snippet-snippet'
-					,anchor: '100%'
-					,height: 400
-					,value: config.record.snippet || "<?php\n"
+                xtype: 'panel'
+                ,border: false
+                ,layout: 'form'
+                ,cls:'main-wrapper'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'modx-codearea'
+                    ,fieldLabel: _('snippet_code')
+                    ,name: 'snippet'
+                    ,id: 'modx-snippet-snippet'
+                    ,anchor: '100%'
+                    ,height: 400
+                    ,value: config.record.snippet || "<?php\n"
+                    ,mimeType: 'application/x-php'
                 }]
             }]
         },{

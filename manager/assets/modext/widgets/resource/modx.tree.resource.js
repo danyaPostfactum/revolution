@@ -814,7 +814,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,checked: MODx.config.publish_default == '1' ? 1 : 0
                         }]
                     }]
-                },MODx.getQRContentField(this.ident,config.record.class_key)]
+                },MODx.getQRContentField(this.ident,config.record)]
             },{
                 id: 'modx-'+this.ident+'-settings'
                 ,title: _('settings')
@@ -947,7 +947,7 @@ MODx.window.QuickUpdateResource = function(config) {
                             ,inputValue: 1
                         }]
                     }]
-                },MODx.getQRContentField(this.ident,config.record.class_key)]
+                },MODx.getQRContentField(this.ident,config.record)]
             },{
                 id: 'modx-'+this.ident+'-settings'
                 ,title: _('settings'),layout: 'form'
@@ -987,9 +987,9 @@ Ext.extend(MODx.window.QuickUpdateResource,MODx.Window);
 Ext.reg('modx-window-quick-update-modResource',MODx.window.QuickUpdateResource);
 
 
-MODx.getQRContentField = function(id,cls) {
+MODx.getQRContentField = function(id,record) {
     id = id || 'qur';
-    cls = cls || 'modDocument';
+    cls = record.class_key || 'modDocument';
     var dm = Ext.getBody().getViewSize();
     var o = {};
     switch (cls) {
@@ -1042,13 +1042,14 @@ MODx.getQRContentField = function(id,cls) {
         case 'modDocument':
         default:
             o = {
-                xtype: 'textarea'
+                xtype: 'modx-codearea'
                 ,name: 'content'
                 ,id: 'modx-'+id+'-content'
                 ,hideLabel: true
                 ,labelSeparator: ''
                 ,anchor: '100%'
                 ,height: dm.height <= 768 ? 200 : 280
+                ,mimeType: record.contentType
             };
             break;
     }

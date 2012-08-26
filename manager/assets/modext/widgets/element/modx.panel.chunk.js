@@ -188,22 +188,23 @@ MODx.panel.Chunk = function(config) {
                         ,hideMode: 'offsets'
                     }]
                 }]
-			},{
-				xtype: 'panel'
-				,border: false
-				,layout: 'form'
-				,cls:'main-wrapper'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,fieldLabel: _('chunk_code')
-					,name: 'snippet'
-					,id: 'modx-chunk-snippet'
-					,anchor: '100%'
-					,height: 400
-					,value: config.record.snippet || ''
-				}]
-			}]
+            },{
+                xtype: 'panel'
+                ,border: false
+                ,layout: 'form'
+                ,cls:'main-wrapper'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'modx-codearea'
+                    ,fieldLabel: _('chunk_code')
+                    ,name: 'snippet'
+                    ,id: 'modx-chunk-snippet'
+                    ,anchor: '100%'
+                    ,height: 400
+                    ,value: config.record.snippet || ''
+                    ,mimeType: 'text/html'
+                }]
+            }]
         },{
             xtype: 'modx-panel-element-properties'
             ,elementPanel: 'modx-panel-chunk'

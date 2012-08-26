@@ -117,15 +117,15 @@ MODx.panel.EditFile = function(config) {
                     ,anchor: '98%'
                     ,value: config.record.last_modified || ''
                 },{
-                    xtype: 'textarea'
+                    xtype: 'modx-codearea'
                     ,hideLabel: true
                     ,name: 'content'
                     ,id: 'modx-file-content'
                     ,anchor: '98%'
                     ,grow: false
                     ,height: 400
-                    ,style: 'font-size: 11px;'
                     ,value: config.record.content || ''
+                    ,mimeType: config.record.mime_type || 'text/plain'
                 }]
             }]
         }])]

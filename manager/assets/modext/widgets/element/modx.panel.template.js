@@ -189,22 +189,23 @@ MODx.panel.Template = function(config) {
                         ,hideMode: 'offsets'
                     }]
                 }]
-			},{
-				xtype: 'panel'
-				,border: false
-				,layout: 'form'
-				,cls:'main-wrapper'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,fieldLabel: _('template_code')						
-					,name: 'content'
-					,id: 'modx-template-content'
-					,anchor: '100%'
-					,height: 400
-					,value: config.record.content || ''
-				}]
-			}]
+            },{
+                xtype: 'panel'
+                ,border: false
+                ,layout: 'form'
+                ,cls:'main-wrapper'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'modx-codearea'
+                    ,fieldLabel: _('template_code')
+                    ,name: 'content'
+                    ,id: 'modx-template-content'
+                    ,anchor: '100%'
+                    ,height: 400
+                    ,value: config.record.content || ''
+                    ,mimeType: 'text/html'
+                }]
+            }]
         },{
             xtype: 'modx-panel-element-properties'
             ,preventRender: true

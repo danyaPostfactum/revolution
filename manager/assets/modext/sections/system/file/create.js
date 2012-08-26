@@ -99,7 +99,7 @@ MODx.panel.CreateFile = function(config) {
                         }}
                     }
                 },{
-                    xtype: 'textarea'
+                    xtype: 'modx-codearea'
                     ,hideLabel: false
                     ,fieldLabel: _('content')
                     ,name: 'content'
@@ -107,7 +107,7 @@ MODx.panel.CreateFile = function(config) {
                     ,anchor: '100%'
                     ,grow: false
                     ,height: 400
-                    ,style: 'font-size: 11px;'
+                    ,mimeType: 'text/plain'
                 }]
             }]
         }])]

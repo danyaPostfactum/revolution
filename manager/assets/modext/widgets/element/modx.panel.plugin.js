@@ -200,19 +200,20 @@ MODx.panel.Plugin = function(config) {
 
                 }]
             },{
-				xtype: 'panel'
-				,border: false
-				,layout: 'form'
-				,cls:'main-wrapper'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,fieldLabel: _('plugin_code')
-					,name: 'plugincode'
-					,id: 'modx-plugin-plugincode'
-					,anchor: '100%'
-					,height: 400
-					,value: config.record.plugincode || "<?php\n"
+                xtype: 'panel'
+                ,border: false
+                ,layout: 'form'
+                ,cls:'main-wrapper'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'modx-codearea'
+                    ,fieldLabel: _('plugin_code')
+                    ,name: 'plugincode'
+                    ,id: 'modx-plugin-plugincode'
+                    ,anchor: '100%'
+                    ,height: 400
+                    ,value: config.record.plugincode || "<?php\n"
+                    ,mimeType: 'application/x-php'
                 }]
             }]
         },{
