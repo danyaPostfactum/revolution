@@ -278,7 +278,7 @@ ul.x-tab-strip-bottom {
     font: normal 13px arial, tahoma, helvetica, sans-serif;
 }
 
-.x-form-text, textarea.x-form-field{
+.x-form-text, .x-form-textarea{
     -moz-border-radius:2px;
     -webkit-border-radius:2px;
     -o-border-radius:2px;
@@ -428,12 +428,12 @@ ul.x-tab-strip-bottom {
     background-image: url(../images/modx-theme/form/search-trigger.gif);
 }
 
-.x-form-focus, textarea.x-form-focus {
+.x-form-focus{
     border-color: #658F1A;
     background-color: #FFFFFF;
 }
 
-.x-form-invalid, textarea.x-form-invalid{
+.x-form-invalid{
     background-color: #fff;
     background-image: url(../images/modx-theme/grid/invalid_line.gif);
     border-color: #c30;
@@ -457,7 +457,7 @@ ul.x-tab-strip-bottom {
     border-color: #ff7870;
 }
 
-.x-form-inner-invalid, textarea.x-form-inner-invalid{
+.x-form-inner-invalid{
     background-color: #fff;
     background-image: url(../images/modx-theme/grid/invalid_line.gif);
 }

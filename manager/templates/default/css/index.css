@@ -306,7 +306,7 @@ h3 {
 .green { color: green !important; }
 .error { color: red !important; }
 
-textarea.x-form-field {
+.x-form-textarea {
     font-family: "Courier New", Courier, monospace;
     font-weight: normal;
 }

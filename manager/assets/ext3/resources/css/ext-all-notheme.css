@@ -884,13 +884,13 @@ ul.x-tab-strip li.x-tab-edge {
 }
 
 /* ---- text fields ---- */
-.x-form-text, textarea.x-form-field{
+.x-form-text, .x-form-textarea{
     padding:1px 3px;
     background:repeat-x 0 0;
     border:1px solid;
 }
 
-textarea.x-form-field {
+.x-form-textarea {
     padding:2px 3px;
 }
 
@@ -926,7 +926,7 @@ textarea.x-form-field {
     top: -1px; /* because of all these margin hacks, these buttons are off by one pixel in IE6,7 */
 }
 
-.ext-ie6 textarea.x-form-field, .ext-ie7 textarea.x-form-field {
+.ext-ie6 .x-form-textarea, .ext-ie7 .x-form-textarea {
     margin:-1px 0; /* ie bogus margin bug */
 }
 
@@ -934,12 +934,12 @@ textarea.x-form-field {
     height:18px;
 }
 
-.ext-safari.ext-mac textarea.x-form-field {
+.ext-safari.ext-mac .x-form-textarea {
     margin-bottom:-2px; /* another bogus margin bug, safari/mac only */
 }
 
 /*
-.ext-strict .ext-ie8 .x-form-text, .ext-strict .ext-ie8 textarea.x-form-field {
+.ext-strict .ext-ie8 .x-form-text, .ext-strict .ext-ie8 .x-form-textarea {
     margin-bottom: 1px;
 }
 */
