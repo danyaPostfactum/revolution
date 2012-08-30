@@ -200,9 +200,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,loadDropZones: function() {
         var flds = this.getForm().items;
         flds.each(function(fld) {
-            if (fld.isFormField && (
-                fld.isXType('textfield') || fld.isXType('textarea')
-            ) && !fld.isXType('combo')) {
+            if (fld.isFormField && !fld.readOnly && fld.isXType('textfield') && !fld.isXType('combo')) {
                 var el = fld.getEl();
                 if (el) {
                     new MODx.load({
