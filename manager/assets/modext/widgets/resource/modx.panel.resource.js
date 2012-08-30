@@ -720,19 +720,37 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
 
     ,getContentField: function(config) {
+        if (MODx.config.use_editor && config.record.richtext){
+            var contentField = {
+                xtype: 'modx-htmleditor'
+                ,name: 'ta'
+                ,id: 'ta'
+                ,hideLabel: true
+                ,anchor: '100%'
+                ,height: 400
+                ,grow: false
+                ,value: (config.record.content || config.record.ta) || ''
+            }
+        } else {
+            var contentField = {
+                xtype: 'modx-codearea'
+                ,name: 'ta'
+                ,id: 'ta'
+                ,hideLabel: true
+                ,anchor: '100%'
+                ,height: 400
+                ,grow: false
+                ,value: (config.record.content || config.record.ta) || ''
+                ,mimeType: config.record.contentType
+            }
+        }
+
         return [{
             id: 'modx-content-above'
             ,border: false
-        },{
-            xtype: 'textarea'
-            ,name: 'ta'
-            ,id: 'ta'
-            ,hideLabel: true
-            ,anchor: '100%'
-            ,height: 400
-            ,grow: false
-            ,value: (config.record.content || config.record.ta) || ''
-        },{
+        }
+        ,contentField
+        ,{
             id: 'modx-content-below'
             ,border: false
         }];
