@@ -58,6 +58,7 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                         ,classKey: data.node.attributes.classKey
                         ,name: data.node.attributes.name
                         ,output: v
+                        ,ddTarget: ddTarget
                         ,ddTargetEl: ddTargetEl
                         ,cfg: cfg
                         ,iframe: cfg.iframe
@@ -72,19 +73,32 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                         var el = Ext.get(ddTargetEl);
                         if (el.dom.id == 'modx-static-content') {
                             v = v.substring(1);
-                            Ext.getCmp(el.dom.id).setValue('');
+                            ddTarget.setValue('');
+                            ddTarget.el.blur();
+                            ddTarget.el.focus();
                         }
                         if (el.dom.id == 'modx-symlink-content' || el.dom.id == 'modx-weblink-content') {
-                            Ext.getCmp(el.dom.id).setValue('');
-                            MODx.insertAtCursor(ddTargetEl,data.node.attributes.pk,cfg.onInsert);
+                            v = data.node.attributes.pk;
+                            ddTarget.setValue('');
+                            ddTarget.insertAtCursor(v);
+                            ddTarget.el.blur();
+                            ddTarget.el.focus();
                         } else if (el.dom.id == 'modx-resource-parent') {
                             v = data.node.attributes.pk;
-                            Ext.getCmp('modx-resource-parent').setValue(v);
+                            ddTarget.setValue(v);
+                            ddTarget.el.blur();
+                            ddTarget.el.focus();
                             Ext.getCmp('modx-resource-parent-hidden').setValue(v);
                             var p = Ext.getCmp('modx-panel-resource');
                             if (p) { p.markDirty(); }
                         } else {
-                            MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
+                            if (ddTarget && ddTarget.isXType('textfield')) {
+                                ddTarget.insertAtCursor(v);
+                                ddTarget.el.blur();
+                                ddTarget.el.focus();
+                            } else {
+                                MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
+                            }
                         }
 
                         if (cfg.panel) {
@@ -311,6 +325,10 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         
         if (this.config.record.iframe) {
             MODx.insertForRTE(v,this.config.record.cfg);
+        } else if (this.config.record.ddTarget && this.config.record.ddTarget.isXType('textfield')) {
+            this.config.record.ddTarget.insertAtCursor(v);
+            this.config.record.ddTarget.el.blur();
+            this.config.record.ddTarget.el.focus();
         } else {
             MODx.insertAtCursor(this.config.record.ddTargetEl,v);
         }
