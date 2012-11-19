@@ -56,7 +56,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                    MODx.loadAction(MODx.action['resource/update'], 'id='+r.object.id);
                 },scope:this}
             }
         });

@@ -62,10 +62,10 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
         return false;
     }
     ,editResource: function() {
-        location.href = '?a='+MODx.action['resource/update']+'&id='+this.config.record.id;
+        MODx.loadAction(MODx.action['resource/update'], 'id='+this.config.record.id);
     }
     ,cancel: function() {
-        location.href = '?a='+MODx.action['welcome'];
+        MODx.loadAction(MODx.action['welcome']);
     }
 });
 Ext.reg('modx-page-resource-data',MODx.page.ResourceData);
