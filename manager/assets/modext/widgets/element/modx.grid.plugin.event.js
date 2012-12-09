@@ -267,8 +267,12 @@ Ext.extend(MODx.grid.PluginEventAssoc,MODx.grid.LocalGrid,{
                 },scope:this}
             }
         });
-    }    
-    
+    }
+
+    ,removePlugin: function(config) {
+        this.removeRow(config);
+    }
+
     ,_showMenu: function(g,ri,e) {
         var sm = this.getSelectionModel();
         e.stopEvent();
@@ -276,7 +280,7 @@ Ext.extend(MODx.grid.PluginEventAssoc,MODx.grid.LocalGrid,{
         this.menu.removeAll();
         this.addContextMenuItem([{
             text: _('remove')
-            ,handler: this.remove.createDelegate(this,[{
+            ,handler: this.removePlugin.createDelegate(this,[{
                 title: _('warning')
                 ,text: _('plugin_event_plugin_remove_confirm')
             }])

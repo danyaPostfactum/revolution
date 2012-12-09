@@ -231,7 +231,7 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
             m.push({
                 text: _('property_remove')
                 ,scope: this
-                ,handler: this.remove.createDelegate(this,[{
+                ,handler: this.removeRow.createDelegate(this,[{
                     title: _('warning')
                     ,text: _('property_remove_confirm')
                 }])

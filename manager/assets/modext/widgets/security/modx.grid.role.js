@@ -61,11 +61,12 @@ Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
         if (p.indexOf('remove') != -1) {
             m.push({
                 text: _('role_remove')
-                ,handler: this.remove.createDelegate(this,['role_remove_confirm'])
+                ,handler: this.removeRole.createDelegate(this,['role_remove_confirm'])
             });
         }
         return m;
     }
+
     ,createRole: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-role-create'
@@ -75,6 +76,10 @@ Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
                 },scope:this}
             }
         });
+    }
+
+    ,removeRole: function(text) {
+        this.removeRow(text);
     }
 });
 Ext.reg('modx-grid-role',MODx.grid.Role);

@@ -40,7 +40,7 @@ if ($resourceGroup == null) {
         $menu[] = array(
             'text' => $modx->lexicon('resource_group_remove'),
             'handler' => 'function(itm,e) {
-                this.remove(itm,e);
+                this.removeNode(itm,e);
             }',
         );
 
