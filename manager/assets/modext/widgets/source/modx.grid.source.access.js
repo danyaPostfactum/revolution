@@ -107,10 +107,7 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
             ,handler: this.editAcl
         },{
             text: _('source_access_remove')
-            ,handler: this.remove.createDelegate(this,[{
-                title: _('source_access_remove')
-                ,text: _('source_access_remove_confirm')
-            }])
+            ,handler: this.removeAcl
         }];
     }
 

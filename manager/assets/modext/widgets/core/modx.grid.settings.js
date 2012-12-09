@@ -188,7 +188,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ,handler: this.updateSetting
             },'-',{
                 text: _('setting_remove')
-                ,handler: this.remove.createDelegate(this,['setting_remove_confirm'])
+                ,handler: this.removeSetting.createDelegate(this,['setting_remove_confirm'])
             });
         }
         if (m.length > 0) {
@@ -214,7 +214,11 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         uss.setValues(r);
         uss.show(e.target);
     }
-    
+
+    ,removeSetting: function(text) {
+        this.removeRow(text);
+    }
+
     ,clearFilter: function() {
         var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
     	this.getStore().baseParams = {

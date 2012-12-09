@@ -113,7 +113,11 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
             }
         });
     }
-    
+
+    ,removeGroup: function(config) {
+        this.removeRow(config);
+    }
+
     ,_showMenu: function(g,ri,e) {
         e.stopEvent();
         e.preventDefault();
@@ -130,7 +134,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
             ,scope: this
         },'-',{
             text: _('user_group_user_remove')
-            ,handler: this.remove.createDelegate(this,[{text: _('user_group_remove_confirm')}])
+            ,handler: this.removeGroup.createDelegate(this, [{text: _('user_group_remove_confirm')}])
             ,scope: this
         });
         m.show(e.target);
