@@ -207,8 +207,15 @@ Ext.reg('modx-layout',MODx.Layout);
 MODx.LayoutMgr = function() {
     var _activeMenu = 'menu0';
     return {
-        loadPage: function(a,p) {
+        loadAction: function(a,p) {
             location.href = '?a='+a+'&'+(p || '');
+            return false;
+        }
+        ,loadPage: function(url) {
+            if (typeof url == "number")
+                this.loadAction.apply(this, arguments);
+            else
+                location.href = url;
             return false;
         }
         ,changeMenu: function(a,sm) {
@@ -224,6 +231,7 @@ MODx.LayoutMgr = function() {
 }();
 
 /* aliases for quicker reference */
+MODx.loadAction = MODx.LayoutMgr.loadAction;
 MODx.loadPage = MODx.LayoutMgr.loadPage;
 MODx.showDashboard = MODx.LayoutMgr.showDashboard;
 MODx.hideDashboard = MODx.LayoutMgr.hideDashboard;
