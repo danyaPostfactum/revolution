@@ -51,6 +51,7 @@ Ext.extend(MODx,Ext.Component,{
             ,afterClearCache: true
             ,afterLogout: true
             ,afterReleaseLocks: true
+            ,beforeLoadPage: true
             ,ready: true
         });
     }
