@@ -33,9 +33,9 @@ $_lang['area_system'] = 'System und Server';
 $_lang['areas'] = 'Bereiche';
 $_lang['charset'] = 'Zeichensatz';
 $_lang['country'] = 'Land';
-$_lang['description_desc'] = 'Eine kurze Beschreibung der Einstellung. Dies kann auch ein Schlüssel eines Lexikon-Eintrags sein.';
+$_lang['description_desc'] = 'Eine kurze Beschreibung der Einstellung. Dies kann auch ein Lexikon-Eintrag basierend auf dem Schlüssel sein, der dem Format "setting_" + Schlüssel + "_desc" entspricht.';
 $_lang['key_desc'] = 'Der Schlüssel der Einstellung. Er ist in Ihren Inhalten über den [[++key]]-Platzhalter verfügbar.';
-$_lang['name_desc'] = 'Ein Name für die Einstellung. Dies kann auch ein Schlüssel eines Lexikon-Eintrags sein.';
+$_lang['name_desc'] = 'Ein Name für die Einstellung. Dies kann auch ein Lexikon-Eintrag basierend auf dem Schlüssel sein, der dem Format "setting_" + Schlüssel entspricht.';
 $_lang['namespace'] = 'Namensraum';
 $_lang['namespace_desc'] = 'Der Namensraum, mit dem diese Einstellung verbunden ist. Das Standard-Lexikon-Thema wird für diesen Namensraum geladen, wenn die Einstellungen eingelesen werden.';
 $_lang['namespace_filter'] = 'Nach Namensraum filtern...';
@@ -97,8 +97,8 @@ $_lang['setting_allow_forward_across_contexts_desc'] = 'Wenn diese Einstellung a
 $_lang['setting_allow_manager_login_forgot_password'] = 'Passwort-vergessen-Funktion auf Manager-Login-Seite zulassen';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird die Möglichkeit, sich ein neues Passwort zuschicken zu lassen, wenn man das bisherige vergessen hat, auf der Login-Seite des Managers deaktiviert.';
 
-$_lang['setting_allow_tags_in_post'] = 'HTML-Tags in POST-Requests erlauben';
-$_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, können POST-Requests HTML-Formular-Tags enthalten.';
+$_lang['setting_allow_tags_in_post'] = 'Tags in POST-Requests erlauben';
+$_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt ist, werden HTML-Script-Tags, numerische HTML-Entities und MODX-Tags aus allen POST-Variablen entfernt. MODX empfiehlt, diese Einstellung für alle Kontexte auf "Nein" zu belassen, außer für den Kontext mgr, für den diese Einstellung standardmäßig auf "Ja" gesetzt ist.';
 
 $_lang['setting_archive_with'] = 'Erzwinge PCLZip-Archive';
 $_lang['setting_archive_with_desc'] = 'Wählen Sie "Ja", um PCLZip anstatt ZipArchive als ZIP-Extension zu nutzen. Wählen Sie diese Einstellung, falls Sie "extractTo"-Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
@@ -126,6 +126,9 @@ $_lang['setting_blocked_minutes_desc'] = 'Hier können Sie die Anzahl der Minute
 
 $_lang['setting_cache_action_map'] = 'Aktionen-Cache aktivieren';
 $_lang['setting_cache_action_map_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Aktionen (bzw. Controller-Maps) gecacht, um die Ladezeiten von Manager-Seiten zu reduzieren.';
+
+$_lang['setting_cache_alias_map'] = 'Kontext-Alias-Cache aktivieren';
+$_lang['setting_cache_alias_map_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Ressourcen-URIs in den Kontext gecacht. Diese Einstellung sollte für kleinere Sites aktiviert und für größere Sites deaktiviert werden, um die Performance zu verbessern.';
 
 $_lang['setting_cache_context_settings'] = 'Kontext-Einstellungen-Cache aktivieren';
 $_lang['setting_cache_context_settings_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Kontext-Einstellungen gecacht, um die Ladezeiten zu verringern.';
@@ -187,7 +190,7 @@ $_lang['setting_compress_css'] = 'Komprimiertes CSS verwenden';
 $_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js'] = 'Komprimierte JavaScript-Bibliotheken verwenden';
-$_lang['setting_compress_js_desc'] = 'Wenn dies aktiviert ist, benutzt MODX eine komprimierte Version seiner JavaScript-Bibliotheken. Dies reduziert Last und Ausführungszeit. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
+$_lang['setting_compress_js_desc'] = 'Wenn diese Option aktiviert ist, benutzt MODX eine komprimierte Version seiner JavaScript-Bibliotheken. Dies reduziert Last und Ausführungszeit. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js_groups'] = 'Gruppieren nutzen, wenn JavaScript komprimiert wird';
 $_lang['setting_compress_js_groups_desc'] = 'Die Core-JavaScripts des MODX-Managers gruppieren durch Benutzung der groupsConfig-Funktion von minify. Setzen Sie diese Einstellung auf "Ja", wenn Sie Suhosin einsetzen oder sich andere einschränkende Faktoren auswirken.';
@@ -197,6 +200,9 @@ $_lang['setting_compress_js_max_files_desc'] = 'Die maximale Anzahl an JavaScrip
 
 $_lang['setting_concat_js'] = 'Verknüpfte Javascript-Bibliotheken verwenden';
 $_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine verknüpfte Version seiner meistverwendeten JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager drastisch reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
+
+$_lang['setting_confirm_navigation'] = 'Navigation trotz ungespeicherter Änderungen bestätigen';
+$_lang['setting_confirm_navigation_desc'] = 'Wenn diese Option aktiviert ist, wird der Benutzer aufgefordert, seine Absicht zu bestätigen, wenn es ungespeicherte Änderungen gibt.';
 
 $_lang['setting_container_suffix'] = 'Container-Suffix';
 $_lang['setting_container_suffix_desc'] = 'Das Suffix, das Ressourcen, die als Container definiert wurden, hinzugefügt wird, wenn suchmaschinenfreundliche URLs verwendet werden.';
@@ -252,6 +258,9 @@ $_lang['setting_enable_dragdrop_desc'] = 'Wenn diese Einstellung auf "Nein" gese
 $_lang['setting_error_page'] = 'Fehlerseite';
 $_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Benutzern angezeigt werden soll, wenn sie ein Dokument aufrufen, das nicht existiert. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört und dass dieses veröffentlicht wurde!</strong>';
 $_lang['setting_error_page_err'] = 'Bitte geben Sie eine Ressourcen-ID für die Fehlerseite an.';
+
+$_lang['setting_ext_debug'] = 'ExtJS-Debug';
+$_lang['setting_ext_debug_desc'] = 'Gibt an, ob ext-all-debug.js geladen werden soll, um beim Debuggen Ihres ExtJS-Codes zu helfen.';
 
 $_lang['setting_extension_packages'] = 'Erweiterungs-Packages';
 $_lang['setting_extension_packages_desc'] = 'Ein JSON-Array von Packages, die bei der MODX-Initialisierung geladen werden sollen. Im Format [{"packagename":{pfad":"pfad/zum/package"},{"weiterespackage":{"pfad":"pfad/zum/anderenpackage"}}]';
@@ -471,7 +480,7 @@ $_lang['setting_proxy_auth_type'] = 'Proxy-Authentifizierungs-Typ';
 $_lang['setting_proxy_auth_type_desc'] = 'Unterstützt entweder BASIC oder NTLM.';
 
 $_lang['setting_proxy_host'] = 'Proxy-Host';
-$_lang['setting_proxy_host_desc'] = 'Wenn Ihr Server einen Proxy verwendet, geben Sie hier den Hostnamen ein, um MODX-Features zu aktivieren, die den Proxy evtl. verwenden müssen, wie z. B. die Package-Verwaltung.';
+$_lang['setting_proxy_host_desc'] = 'Wenn Ihr Server einen Proxy verwendet, geben Sie hier den Hostnamen ein, um MODX-Features zu aktivieren, die den Proxy evtl. verwenden müssen, wie z.B. die Package-Verwaltung.';
 
 $_lang['setting_proxy_password'] = 'Proxy-Passwort';
 $_lang['setting_proxy_password_desc'] = 'Das Passwort, das benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
@@ -580,7 +589,7 @@ $_lang['setting_resource_tree_node_name'] = 'Feld zur Benennung der Knoten im Re
 $_lang['setting_resource_tree_node_name_desc'] = 'Geben Sie das Ressourcen-Feld an, das zur Darstellung der Knoten im Ressourcen-Baum verwendet werden soll. Standardmäßig wird das Feld pagetitle verwendet, es kann aber jedes Ressourcen-Feld verwendet werden, z.B. menutitle, alias, longtitle etc.';
 
 $_lang['setting_resource_tree_node_tooltip'] = 'Ressourcen-Baum-Tooltip-Feld';
-$_lang['setting_resource_tree_node_tooltip_desc'] = 'Geben Sie das Ressourcen-Feld an, das bei der Darstellung der Tooltips für die Einträge im Ressourcen-Baum verwendet wird. Jedes Ressourcen-Feld kann verwendet werden, z. B. menutitle, alias, longtitle etc. Wird dieses Feld leer gelassen, so wird der longtitle mit einer Beschreibung darunter angezeigt.';
+$_lang['setting_resource_tree_node_tooltip_desc'] = 'Geben Sie das Ressourcen-Feld an, das bei der Darstellung der Tooltips für die Einträge im Ressourcen-Baum verwendet wird. Jedes Ressourcen-Feld kann verwendet werden, z.B. menutitle, alias, longtitle etc. Wird dieses Feld leer gelassen, so wird der longtitle mit einer Beschreibung darunter angezeigt.';
 
 $_lang['setting_richtext_default'] = 'Rich-Text-Editor standardmäßig verwenden';
 $_lang['setting_richtext_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig den Rich-Text-Editor verwenden sollen.';
@@ -609,6 +618,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Verwenden Sie diese Einstellung, u
 
 $_lang['setting_session_cookie_secure'] = 'Sichere Session-Cookies';
 $_lang['setting_session_cookie_secure_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um sichere Session-Cookies zu verwenden. Diese werden ausschließlich SSL-geschützt übertragen.';
+
+$_lang['setting_session_cookie_httponly'] = 'Session-Cookie: HttpOnly';
+$_lang['setting_session_cookie_httponly_desc'] = 'Verwenden Sie diese Einstellung, um das HttpOnly-Flag für Session-Cookies zu setzen.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Maximale Lebensdauer des Session-Garbage-Collectors';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Erlaubt Anpassung der PHP-Konfigurationseinstellung session.gc_maxlifetime bei Benutzung von "modSessionHandler".';
@@ -655,7 +667,7 @@ $_lang['setting_site_unavailable_page_desc'] = 'Geben Sie die ID der Ressource e
 $_lang['setting_site_unavailable_page_err'] = 'Bitte geben Sie die Ressourcen-ID für die Website-Offline-Seite an.';
 
 $_lang['setting_strip_image_paths'] = 'Relative Dateibrowser-Pfade?';
-$_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Dateibrowser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z. B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
+$_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Dateibrowser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z.B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
 
 $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinieren';
 $_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';

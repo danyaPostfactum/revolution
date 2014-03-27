@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['login_language'] = 'Lingua';
 $_lang['login_activation_key_err'] = 'Chiave di Attivazione non corrispondente! Per favore controlla la mail di attivazione e accertati di aver caricato l\' URL corretto.';
 $_lang['login_blocked_admin'] = 'Sei stato bloccato nella gestione da un amministratore.';
 $_lang['login_blocked_error'] = 'Sei stato temporaneamente bloccato e non puoi accedere. Riprova più tardi.';
@@ -13,8 +14,8 @@ $_lang['login_blocked_ip'] = 'Non sei autorizzato ad accedere dal tuo attuale in
 $_lang['login_blocked_time'] = 'Non sei autorizzato ad accedere in questo momento. Riprova più tardi.';
 $_lang['login_blocked_too_many_attempts'] = 'Sei stato bloccato dopo troppi tentativi di accesso falliti.';
 $_lang['login_button'] = 'Accedi';
-$_lang['login_cannot_locate_account'] = 'Account sconosciuto. Controlla il nome utente e  ri-digita la password per riprovare.';
-$_lang['login_copyright'] = '&copy; 2005-2011 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
+$_lang['login_cannot_locate_account'] = 'Nome Utente o Password errati.  Controlla il Nome Utente, ridigita la Password e riprova.';
+$_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Account Email:';
 $_lang['login_err_unknown'] = 'Errore sconosciuto durante il tentativo di accesso.';
 $_lang['login_forget_your_login'] = 'Dati dimenticati?';

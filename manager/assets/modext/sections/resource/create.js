@@ -1,6 +1,6 @@
 /**
  * Loads the create resource page
- * 
+ *
  * @class MODx.page.CreateResource
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -30,6 +30,7 @@ MODx.page.CreateResource = function(config) {
             ,publish_document: config.publish_document
             ,show_tvs: config.show_tvs
             ,mode: config.mode
+            ,url: config.url
         }]
     });
     MODx.page.CreateResource.superclass.constructor.call(this,config);
@@ -43,7 +44,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                 ,id: 'modx-abtn-save'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: true
+                //,checkDirty: true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true

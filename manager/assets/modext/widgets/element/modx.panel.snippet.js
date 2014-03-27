@@ -195,7 +195,7 @@ MODx.panel.Snippet = function(config) {
                 ,cls:'main-wrapper'
                 ,labelAlign: 'top'
                 ,items: [{
-                    xtype: 'modx-codearea'
+                    xtype: 'modx-texteditor'
                     ,fieldLabel: _('snippet_code')
                     ,name: 'snippet'
                     ,id: 'modx-snippet-snippet'

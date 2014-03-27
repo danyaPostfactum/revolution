@@ -5,14 +5,14 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
+ * @author honda http://kogus.org 2012-12-04
  * @author enogu http://www.kuroienogu.net/
- * @author honda http://kogus.org
  * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
 $_lang['categories'] = 'カテゴリー';
-$_lang['category_confirm_delete'] = 'カテゴリーを削除しますか？このカテゴリーに属している全てのエレメントは「カテゴリーなし」に分類されます。';
+$_lang['category_confirm_delete'] = 'カテゴリーを削除しますか？　このカテゴリーに属している全てのエレメントは「カテゴリーなし」に分類されます。';
 $_lang['category_create'] = 'カテゴリーを作成';
 $_lang['category_err_ae'] = '同じ名前のカテゴリーが既に存在するため、このカテゴリーを保存できませんでした。';
 $_lang['category_err_create'] = 'カテゴリーの作成中にエラーが発生しました。';
@@ -20,7 +20,7 @@ $_lang['category_err_not_found'] = 'カテゴリーが見つかりませんで�
 $_lang['category_err_nf'] = 'カテゴリーが見つかりませんでした。.';
 $_lang['category_err_nfs'] = '%sに関連するカテゴリーは見つかりませんでした。';
 $_lang['category_err_ns'] = 'カテゴリーが指定されていません。';
-$_lang['category_err_ns_name'] = '正しいカテゴリー名を指定して下さい。';
+$_lang['category_err_ns_name'] = '正しいカテゴリー名を指定してください。';
 $_lang['category_err_remove'] = 'カテゴリーの削除中にエラーが発生しました。';
 $_lang['category_err_save'] = 'カテゴリーの保存中にエラーが発生しました。';
 $_lang['category_existing'] = '存在するカテゴリー';

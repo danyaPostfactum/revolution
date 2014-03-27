@@ -93,7 +93,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         /** @var modResource $object */
         $object = $modx->getObject('modResource',$properties['id']);
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : ($object ? $object->get('class_key') : 'modDocument');
-        
+
         if (!in_array($classKey,array('modDocument','modResource',''))) {
             $className = $classKey.'UpdateProcessor';
             if (!class_exists($className)) {
@@ -113,9 +113,9 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $locked = $this->addLock();
         if ($locked !== true) {
             if ($this->lockedUser) {
-                return $this->failure($this->modx->lexicon('resource_locked_by', array('id' => $this->object->get('id'), 'user' => $this->lockedUser->get('username'))));
+                return $this->modx->lexicon('resource_locked_by', array('id' => $this->object->get('id'), 'user' => $this->lockedUser->get('username')));
             } else {
-                return $this->failure($this->modx->lexicon('access_denied'));
+                return $this->modx->lexicon('access_denied');
             }
         }
 
@@ -123,7 +123,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $properties = $this->getProperties();
         if (isset($properties['ta'])) $this->setProperty('content',$properties['ta']);
 
-        $this->workingContext = $this->modx->getContext($this->getProperty('context_key'));
+        $this->workingContext = $this->modx->getContext($this->getProperty('context_key', $this->object->get('context_key') ? $this->object->get('context_key') : 'web'));
 
         $this->trimPageTitle();
         $this->handleParent();
@@ -134,11 +134,14 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->setUnPublishDate();
         $this->checkPublishedOn();
         $this->checkPublishingPermissions();
-        $this->checkForUnPublishOnSiteStart();
+        $result = $this->checkForUnPublishOnSiteStart();
+        if ($result !== true) {
+            return $result;
+        }
         $this->checkDeletedStatus();
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
-        
+
         return parent::beforeSet();
     }
 
@@ -277,7 +280,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->isSiteStart = ($this->object->get('id') == $this->workingContext->getOption('site_start') || $this->object->get('id') == $this->modx->getOption('site_start'));
         $pageTitle = $this->getProperty('pagetitle',null);
         $alias = $this->getProperty('alias');
-        
+
         if ($this->workingContext->getOption('friendly_urls', false) && (!$this->getProperty('reloadOnly',false) || (!empty($pageTitle) || $this->isSiteStart))) {
 
             /* auto assign alias */
@@ -415,11 +418,9 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $publishDate = $this->getProperty('pub_date');
         $unPublishDate = $this->getProperty('unpub_date');
         if ($this->isSiteStart && ($published !== null && empty($published))) {
-            $this->addFieldError('published',$this->modx->lexicon('resource_err_unpublish_sitestart'));
-            $passed = false;
+            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart');
         } else if ($this->isSiteStart && (!empty($publishDate) || !empty($unPublishDate))) {
-            $this->addFieldError('published',$this->modx->lexicon('resource_err_unpublish_sitestart_dates'));
-            $passed = false;
+            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
         }
         return $passed;
     }
@@ -478,7 +479,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
      * Set the parents isfolder status based upon remaining children
      *
      * @TODO Debate whether or not this should be default functionality
-     * 
+     *
      * @return void
      */
     public function fixParents() {
@@ -505,6 +506,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             $tvs = $this->object->getTemplateVars();
             /** @var modTemplateVar $tv */
             foreach ($tvs as $tv) {
+                if (!$tv->checkResourceGroupAccess()) {
+                    continue;
+                }
+
                 $tvKey = 'tv'.$tv->get('id');
                 $value = $this->getProperty($tvKey,null);
                 /* set value of TV */
@@ -541,6 +546,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                         if (is_array($value)) {
                             $featureInsert = array();
                             while (list($featureValue, $featureItem) = each($value)) {
+                                if(empty($featureItem)) { continue; }
                                 $featureInsert[count($featureInsert)] = $featureItem;
                             }
                             $value = implode('||',$featureInsert);
@@ -692,7 +698,11 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         }
         $returnArray['class_key'] = $this->object->get('class_key');
         $this->workingContext->prepare(true);
-        $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), $this->object->get('context_key'), '', 'full');
+        $returnArray['preview_url'] = '';
+        if (!$this->object->get('deleted')) {
+            $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), $this->object->get('context_key'), '', 'full');
+        }
+
         return $this->success('',$returnArray);
     }
 

@@ -63,7 +63,7 @@ $settings['allow_multiple_emails']->fromArray(array (
 $settings['allow_tags_in_post']= $xpdo->newObject('modSystemSetting');
 $settings['allow_tags_in_post']->fromArray(array (
   'key' => 'allow_tags_in_post',
-  'value' => '1',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
@@ -135,6 +135,15 @@ $settings['blocked_minutes']->fromArray(array (
 $settings['cache_action_map']= $xpdo->newObject('modSystemSetting');
 $settings['cache_action_map']->fromArray(array (
   'key' => 'cache_action_map',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
+$settings['cache_alias_map']= $xpdo->newObject('modSystemSetting');
+$settings['cache_alias_map']->fromArray(array (
+  'key' => 'cache_alias_map',
   'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
@@ -334,6 +343,15 @@ $settings['compress_js_groups']= $xpdo->newObject('modSystemSetting');
 $settings['compress_js_groups']->fromArray(array (
   'key' => 'compress_js_groups',
   'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['confirm_navigation']= $xpdo->newObject('modSystemSetting');
+$settings['confirm_navigation']->fromArray(array (
+  'key' => 'confirm_navigation',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -632,7 +650,7 @@ $settings['form_customization_use_all_groups']->fromArray(array (
 $settings['forward_merge_excludes']= $xpdo->newObject('modSystemSetting');
 $settings['forward_merge_excludes']->fromArray(array (
   'key' => 'forward_merge_excludes',
-  'value' => 'type,published,class_key,context_key',
+  'value' => 'type,published,class_key',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',
@@ -1517,6 +1535,15 @@ $settings['session_cookie_secure']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_secure']->fromArray(array (
   'key' => 'session_cookie_secure',
   'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
+$settings['session_cookie_httponly']= $xpdo->newObject('modSystemSetting');
+$settings['session_cookie_httponly']->fromArray(array (
+  'key' => 'session_cookie_httponly',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'session',

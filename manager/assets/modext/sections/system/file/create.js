@@ -79,6 +79,10 @@ MODx.panel.CreateFile = function(config) {
                 ,layout: 'form'
                 ,labelAlign: 'top'
                 ,items: [{
+                    xtype: 'hidden'
+                    ,name: 'source'
+                    ,value: config.record.source || 0
+                },{
                     xtype: 'statictextfield'
                     ,submitValue: true
                     ,fieldLabel: _('directory')
@@ -99,7 +103,7 @@ MODx.panel.CreateFile = function(config) {
                         }}
                     }
                 },{
-                    xtype: 'modx-codearea'
+                    xtype: 'modx-texteditor'
                     ,hideLabel: false
                     ,fieldLabel: _('content')
                     ,name: 'content'
@@ -127,7 +131,7 @@ Ext.extend(MODx.panel.CreateFile,MODx.FormPanel,{
         return true;
     }
     ,success: function(r) {
-        location.href = 'index.php?a='+MODx.action['system/file/edit']+'&file='+r.result.object.file+'&source='+MODx.request.source;
+        MODx.loadPage(MODx.action['system/file/edit'], 'file='+r.result.object.file+'&source='+MODx.request.source);
     }
     ,beforeSubmit: function(o) {
         this.cleanupEditor();

@@ -81,6 +81,10 @@ MODx.panel.EditFile = function(config) {
 				,layout: 'form'
 				,cls:'main-wrapper'
                 ,items: [{
+                    xtype: 'hidden'
+                    ,name: 'source'
+                    ,value: config.record.source || 0
+                },{
                     xtype: 'statictextfield'
                     ,fieldLabel: _('file_name')
                     ,name: 'basename'
@@ -117,7 +121,7 @@ MODx.panel.EditFile = function(config) {
                     ,anchor: '98%'
                     ,value: config.record.last_modified || ''
                 },{
-                    xtype: 'modx-codearea'
+                    xtype: 'modx-texteditor'
                     ,hideLabel: true
                     ,name: 'content'
                     ,id: 'modx-file-content'

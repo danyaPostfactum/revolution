@@ -48,9 +48,9 @@ abstract class ResourceManagerController extends modManagerController {
             $isDerivative = true;
             $resourceClass = in_array($_REQUEST['class_key'],array('modDocument','modResource')) ? 'modDocument' : $_REQUEST['class_key'];
             if ($resourceClass == 'modResource') $resourceClass = 'modDocument';
-        } else if (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined') {
+        } else if (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined' && strlen($_REQUEST['id']) === strlen((integer)$_REQUEST['id'])) {
             /** @var modResource $resource */
-            $resource = $modx->getObject('modResource',$_REQUEST['id']);
+            $resource = $modx->getObject('modResource', array('id' => $_REQUEST['id']));
             if ($resource && !in_array($resource->get('class_key'),array('modDocument','modResource'))) {
                 $isDerivative = true;
                 $resourceClass = $resource->get('class_key');
@@ -424,11 +424,11 @@ abstract class ResourceManagerController extends modManagerController {
                 $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
                 $this->reg = $modx->registry->resource_reload;
                 if($this->reg->connect()) {
-                    $topic = '/resourcereload/' . $scriptProperties['reload'] . '/';
+                    $topic = '/resourcereload/' . $scriptProperties['reload'];
                     $this->reg->subscribe($topic);
-                    $reloadData = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> true));
-                    if(is_array($reloadData) && is_string(reset($reloadData))) {
-                        $reloadData = @unserialize(reset($reloadData));
+                    $msgs = $this->reg->read(array('poll_limit'=> 1, 'remove_read'=> true));
+                    if(is_array($msgs)) {
+                        $reloadData = reset($msgs);
                     }
                     if(!is_array($reloadData)) {
                         $reloadData = array();

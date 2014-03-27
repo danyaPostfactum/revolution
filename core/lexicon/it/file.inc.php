@@ -8,7 +8,7 @@
  */
 $_lang['directory'] = 'Directory';
 $_lang['file_confirm_remove'] = 'Sei sicuro di voler rimuovere questo file? Il sito potrebbe danneggiarsi.';
-$_lang['file_create'] = 'Crea File';
+$_lang['file_create'] = 'Creare File';
 $_lang['file_deleted'] = '<span style="color:#009900">Successo!</span>';
 $_lang['file_delete_file'] = 'Elimina file';
 $_lang['file_delete_folder'] = 'Elimina cartella';
@@ -16,8 +16,10 @@ $_lang['file_download'] = 'Scarica File';
 $_lang['file_download_file'] = 'Scarica file';
 $_lang['file_download_unzip'] = 'Decomprimi file';
 $_lang['file_edit'] = 'Modifica file';
+$_lang['file_err_ae'] = 'Il file %s esiste di gi&agrave;';
 $_lang['file_err_chmod'] = 'Si è verificato un errore sconosciuto tentando di cambiare autorizzazioni (chmod) .';
 $_lang['file_err_chmod_ns'] = 'Specificare una modalità di autorizzazioni (chmod).';
+$_lang['file_err_create'] = 'Si &egrave; verificato un errore durante la creazione del file.';
 $_lang['file_err_ext_not_allowed'] = 'L\'estensione `[[+ext]]` non è permessa.';
 $_lang['file_err_filter'] = 'Nessun file soddisfa questo filtro di ricerca.';
 $_lang['file_err_invalid'] = 'Questo non è un file convenzionale e non può essere rimosso.';
@@ -63,8 +65,8 @@ $_lang['file_folder_remove_confirm'] = 'Sei sicuro di voler rimuovere questa dir
 $_lang['file_last_accessed'] = 'Ultimo accesso';
 $_lang['file_last_modified'] = 'Ultima modifica';
 $_lang['file_name'] = 'Nome del file';
-$_lang['file_quick_create'] = 'Creazione rapida File';
-$_lang['file_quick_update'] = 'Modifica rapida File';
+$_lang['file_quick_create'] = 'Creazione rapida file';
+$_lang['file_quick_update'] = 'Modifica rapida file';
 $_lang['file_remove'] = 'Rimuovi file';
 $_lang['file_remove_confirm'] = 'Sei sicuro di voler rimuovere completamente questo file?';
 $_lang['file_saved'] = 'File aggiornato con successo!';

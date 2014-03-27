@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2012 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -49,7 +49,7 @@ class modOutputFilter {
     /**
      * Filters the output
      * 
-     * @param mixed $element The element to filter
+     * @param modElement $element The element to filter
      */
     public function filter(&$element) {
         $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte',null,false);
@@ -360,13 +360,6 @@ class modOutputFilter {
                             $output = $tag;
                             break;
 
-                        case 'math':
-                            /* Returns the result of an advanced calculation (expensive) */
-                            $filter= preg_replace("~([a-zA-Z\n\r\t\s])~", "", $m_val);
-                            $filter= str_replace('?', $output, $filter);
-                            $output= eval("return " . $filter . ";");
-                            break;
-
                         case 'add':
                         case 'increment':
                         case 'incr':
@@ -539,7 +532,7 @@ class modOutputFilter {
                               $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),array('time' => $agoTS['hours']));
                             }
                             if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-                              $ago[] = $this->modx->lexicon('ago_minutes',array('time' => $agoTS['minutes']));
+                                $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes' ,array('time' => $agoTS['minutes']));
                             }
                             if (empty($ago)) { /* handle <1 min */
                               $ago[] = $this->modx->lexicon('ago_seconds',array('time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0));
@@ -580,14 +573,16 @@ class modOutputFilter {
                             break;
 
                         case 'isloggedin':
-                            /* returns true if user is logged in */
-                            $output= $this->modx->user->isAuthenticated($this->modx->context->get('key'));
+                            /* returns true if user is logged in to the specified context or by default the current context */
+                            $ctxkey = (!empty($m_val)) ? $m_val : $this->modx->context->get('key');
+                            $output= $this->modx->user->isAuthenticated($ctxkey);
                             $output= $output ? true : false;
                             break;
 
                         case 'isnotloggedin':
-                            /* returns true if user is not logged in */
-                            $output= $this->modx->user->isAuthenticated($this->modx->context->get('key'));
+                            /* returns true if user is not logged in to the specified context or by default the current context */
+                            $ctxkey = (!empty($m_val)) ? $m_val : $this->modx->context->get('key');
+                            $output= $this->modx->user->isAuthenticated($ctxkey);
                             $output= $output ? false : true;
                             break;
 
@@ -640,6 +635,8 @@ class modOutputFilter {
                     $this->modx->log(modX::LOG_LEVEL_ERROR,$e->getMessage());
                 }
             }
+            // convert $output to string if there were any processing
+            $output = (string)$output;
         }
     }
 

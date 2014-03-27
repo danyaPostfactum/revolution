@@ -3,8 +3,8 @@
  * Japanese language files for Revolution 2.2 setup
  *
  * @package setup
+ * @author yamamoto http://kyms.jp 2012-08-28
  * @author KUROI Enogu http://twitter.com/enogu
- * @author yamamoto http://kyms.jp
  * @author honda http://kogus.org
  */
 $_lang['additional_css'] = '';
@@ -19,7 +19,7 @@ $_lang['cache_manager_err'] = 'キャッシュマネージャーをロードで�
 $_lang['choose_language'] = '言語を選択してください';
 $_lang['cleanup_errors_title'] = 'Important Note:';
 $_lang['cli_install_failed'] = 'インストールに失敗しました。 エラー: [[+errors]]';
-$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
+$_lang['cli_no_config_file'] = 'CLIインストールの構成ファイル(例えば config.xml)が見つかりませんでした。コマンドラインからMODXをセットアップするには、構成ファイルを用意する必要があります。詳しくは公式ドキュメントを参照してください。';
 $_lang['cli_tests_failed'] = 'インストールの事前テストに失敗しました。 エラー: [[+errors]]';
 $_lang['close'] = '閉じる';
 $_lang['config_file_err_w'] = '設定ファイルの書き込みに失敗しました。';
@@ -81,10 +81,10 @@ $_lang['default_admin_user'] = 'デフォルト管理ユーザー';
 $_lang['delete_setup_dir'] = 'セットアップディレクトリを削除する';
 $_lang['dir'] = 'ltr:左から右';
 $_lang['email_err_ns'] = 'メールアドレスが正しくありません';
-$_lang['err_occ'] = 'エラーが発生しました!';
-$_lang['err_update_table'] = 'Error updating table for class [[+class]]';
+$_lang['err_occ'] = 'エラーが発生しました。';
+$_lang['err_update_table'] = 'class [[+class]] のテーブル更新時にエラーが発生しました。';
 $_lang['errors_occurred'] = 'コアのインストール中にエラーが発生しました。インストール状態を確認し、問題を解消してから再開してください。';
-$_lang['failed'] = '問題あり';
+$_lang['failed'] = '要変更';
 $_lang['fatal_error'] = '致命的なエラー: インストールを続行できません。';
 $_lang['home'] = 'Home';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
@@ -151,7 +151,7 @@ $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました
 $_lang['modx_configuration_file'] = 'MODX設定ファイル';
 $_lang['modx_err_instantiate'] = 'MODXオブジェクトを生成できません。';
 $_lang['modx_err_instantiate_mgr'] = '管理画面コンテキストの初期化に失敗しました。';
-$_lang['modx_footer1'] = '&copy; 2005-2012 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2014 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Revolutionのインストール';
 $_lang['modx_install_complete'] = 'MODXのインストールが完了しました';
@@ -166,7 +166,7 @@ $_lang['options_core_unpacked_note'] = 'MODX公式サイト(本家または日�
 $_lang['options_install_new_copy'] = 'MODX Revolutionを新規インストールします - ';
 $_lang['options_install_new_note'] = '<br />すでにMODX Revolutionがインストールされている場合、このオプションを選ぶとデータは上書きされます。';
 $_lang['options_important_upgrade'] = 'Important Upgrade Note';
-$_lang['options_important_upgrade_note'] = 'アップデートする前に、全ての管理画面のユーザーがログアウトしたことを確認してください。もしアップデート後に不具合が発生した場合、全ての管理画面からログアウトし、ブラウザキャッシュをクリアしてもう一度ログインしてください。<!--Make sure all Manager users <strong>log out before upgrading</strong> to prevent problems (e.g., not being able to access resources). If you have trouble after upgrading, log out of any Manager sessions, clear your browser cache, then log in again.-->';
+$_lang['options_important_upgrade_note'] = 'アップデートを実行する前に、全ての管理画面ユーザーがログアウトしていることを確認してください。もしアップデート後に不具合が発生した場合、全ての管理画面からログアウトし、ブラウザキャッシュをクリアしてもう一度ログインしてください。';
 $_lang['options_new_file_permissions'] = '新規ファイルのパーミッション';
 $_lang['options_new_file_permissions_note'] = 'MODXのシステムを通じてファイルを新規作成する時のパーミッションをここで指定できます。(例：0664・0666など)';
 $_lang['options_new_folder_permissions'] = '新規ディレクトリのパーミッション';
@@ -205,9 +205,9 @@ $_lang['table_created'] = '[[+class]] クラスに対応したテーブルは正
 $_lang['table_err_create'] = '[[+class]] クラスに対応したテーブルの作成中にエラーが発生しました。';
 $_lang['table_updated'] = '[[+class]] クラスに対応したテーブルのアップグレードに成功しました。';
 $_lang['test_class_nf'] = '[[+path]] のインストールテストクラスが発見できませんでした。<br />必要なファイルが全てアップロードされているか確認してください。';
-$_lang['test_version_class_nf'] = 'Could not find the Install Test Versioner class at: [[+path]] <br />Please make sure you\'ve uploaded all the necessary files.';
+$_lang['test_version_class_nf'] = '[[+path]] にインストールのテストVersionerクラスが見つかりませんでした。<br />必要なファイルが全てアップロードされているか確認してください。';
 $_lang['thank_installing'] = 'おつかれさまでした！<br />新しいタイプのCMS「MODX Revolution」を<br />お楽しみください！ - ';
-$_lang['transport_class_err_load'] = 'Error loading transport class.';
+$_lang['transport_class_err_load'] = 'transportクラスの読み込みでエラーが発生しました。';
 $_lang['toggle'] = '表示/非表示の切り替え';
 $_lang['toggle_success'] = '完了メッセージの表示を切り替える';
 $_lang['toggle_warnings'] = '警告メッセージの表示を切り替える';
@@ -222,7 +222,7 @@ $_lang['welcome_message'] = '<p>期待の新世代フレームワーク「MODX R
 $_lang['workspace_err_nf'] = '現在の作業ディレクトリが発見できませんでした。';
 $_lang['workspace_err_path'] = '作業ディレクトリの設定中にエラーが発生しました。';
 $_lang['workspace_path_updated'] = '作業ディレクトリ情報は正しく更新されました。';
-$_lang['versioner_err_nf'] = 'Could not find the Install Versioner at: [[+path]] <br />Please make sure you\'ve uploaded all the necessary files.';
+$_lang['versioner_err_nf'] = '[[+path]] にインストールのVersionerクラスが見つかりませんでした。<br />必要なファイルが全てアップロードされているか確認してください。';
 $_lang['xpdo_err_ins'] = 'xPDOの初期化中にエラーが発生しました。';
 $_lang['xpdo_err_nf'] = '[[+path]] にxPDOのファイルがありません。全てのファイルが正しくアップロードされているか確認してください。';
 $_lang['preload_err_cache'] = '[[+path]]cache ディレクトリーをPHPプロセスから書き込める状態にしてください。';

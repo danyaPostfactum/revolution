@@ -6,14 +6,14 @@
 * @package modx
 * @subpackage lexicon
 * @author enogu http://www.kuroienogu.net/
-* @author honda http://kogus.org
+* @author honda http://kogus.org 2012-12-04
 * @author Nick http://smallworld.west-tokyo.com
 * @author shimojo http://www.priqia.com/
 * @author yamamoto http://kyms.jp
 */
 $_lang['snippet'] = 'スニペット';
 $_lang['snippets_available'] = 'スニペットはページ中にコールを記述して呼び出すことができます。';
-$_lang['snippet_code'] = 'スニペットコード(php)';
+$_lang['snippet_code'] = 'スニペットコード（php）';
 $_lang['snippet_delete_confirm'] = 'このスニペットを削除しますか？';
 $_lang['snippet_desc'] = '説明';
 $_lang['snippet_desc_category'] = 'このスニペットを所属させるカテゴリーを選択します。';
@@ -27,7 +27,7 @@ $_lang['snippet_err_duplicate'] = 'スニペットの複製中にエラーが発
 $_lang['snippet_err_exists_name'] = '[[+name]]という名前のスニペットがすでに存在します。';
 $_lang['snippet_err_invalid_name'] = '無効なスニペット名です。';
 $_lang['snippet_err_locked'] = 'このスニペットは編集中のためロックされています。';
-$_lang['snippet_err_nf'] = 'スニペットが見つかりません';
+$_lang['snippet_err_nf'] = 'スニペットが見つかりません。';
 $_lang['snippet_err_ns'] = 'スニペットが指定されていません。';
 $_lang['snippet_err_ns_name'] = 'スニペットの名前を指定してください。';
 $_lang['snippet_err_remove'] = 'スニペットの削除中にエラーが発生しました。';

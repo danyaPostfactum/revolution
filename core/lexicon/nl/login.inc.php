@@ -6,8 +6,9 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Bert Oost, <bertoost85@gmail.com>
+ * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
+$_lang['login_language'] = 'Taal';
 $_lang['login_activation_key_err'] = 'De activatie-sleutel komt niet overeen! Controleer de activatie e-mail en weet zeker dat je de juiste URL hebt geladen.';
 $_lang['login_blocked_admin'] = 'Je bent geblokkeerd voor de manager door een beheerder.';
 $_lang['login_blocked_error'] = 'Je bent tijdelijk geblokkeerd en kunt niet inloggen. Probeer het later nog eens.';
@@ -15,8 +16,8 @@ $_lang['login_blocked_ip'] = 'Het is niet toegestaan in te loggen vanaf dit IP a
 $_lang['login_blocked_time'] = 'Het is niet toegestaan in te loggen op dit moment. Probeer het later nog eens.';
 $_lang['login_blocked_too_many_attempts'] = 'Je bent geblokkeerd door te veel mislukte login pogingen.';
 $_lang['login_button'] = 'Inloggen';
-$_lang['login_cannot_locate_account'] = 'Het account kon niet gevonden worden. Controleer je gebruikersnaam en type het wachtwoord om het nog eens te proberen.';
-$_lang['login_copyright'] = '&copy; 2005-2010 bij het <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; is gelicentieerd onder de GPLv2 of later.';
+$_lang['login_cannot_locate_account'] = 'De gebruikersnaam of het wachtwoord zijn niet correct. Controleer de gebruikersnaam, type het wachtwoord en probeer het nog eens.';
+$_lang['login_copyright'] = '&copy; 2005-2014 bij het <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; is gelicentieerd onder de GPLv2 of later.';
 $_lang['login_email_label'] = 'Account e-mail:';
 $_lang['login_err_unknown'] = 'Er is een onbekende fout opgetreden tijdens het inloggen.';
 $_lang['login_forget_your_login'] = 'Je inlogaccount vergeten?';

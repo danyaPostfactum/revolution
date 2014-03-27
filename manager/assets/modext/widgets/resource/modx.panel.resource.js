@@ -19,12 +19,14 @@ MODx.panel.Resource = function(config) {
             ,'success': {fn:this.success,scope:this}
             ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'fieldChange': {fn:this.onFieldChange,scope:this}
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
+    this.on('beforedestroy',this.beforeDestroy,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
     if (urio) { urio.on('check',this.freezeUri); }
     this.addEvents('tv-reset');
@@ -35,6 +37,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,classLexiconKey: 'document'
     ,rteElements: 'ta'
     ,rteLoaded: false
+    ,warnUnsavedChanges: false
     ,setup: function() {
         if (!this.initialized) {
             this.getForm().setValues(this.config.record);
@@ -60,6 +63,18 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
                 this.markDirty();
             }
+
+            // Prevent accidental navigation when stuff has not been saved
+            if (MODx.config.confirm_navigation == 1) {
+                var panel = this;
+                window.onbeforeunload = function() {
+                    if (panel.warnUnsavedChanges) return _('unsaved_changes');
+                };
+            }
+
+            if (this.config.record.deleted) {
+                this.handlePreview('hide');
+            }
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
@@ -68,7 +83,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.rteLoaded = true;
             } else if (f && f.getValue() == 0 && this.rteLoaded) {
                 if (MODx.unloadRTE) {
-                    MODx.unloadRTE('ta');
+                    MODx.unloadRTE(this.rteElements);
                 }
                 this.rteLoaded = false;
             }
@@ -81,7 +96,35 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
         if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
         this.fireEvent('load');
+    }
 
+    /**
+     * Handle the preview button visibility according to the resource "deleted" status
+     *
+     * @param {string} action The action to perform on the preview button (hide/show)
+     */
+    ,handlePreview: function(action) {
+        var previewBtn = Ext.getCmp('modx-abtn-preview');
+        if (previewBtn == undefined) {
+            // Button not found, let's try again in a few ms
+            Ext.defer(function() {
+                this.handlePreview(action);
+            }, 200, this);
+        } else {
+            var toolBar = Ext.getCmp('modx-page-update-resource').ab
+                ,btnIndex = toolBar.items.indexOf(previewBtn);
+
+            // Do the desired action on the button and its sibling (a spacer)
+            previewBtn[action]();
+            toolBar.items.get(btnIndex + 1)[action]();
+        }
+    }
+
+    ,beforeDestroy: function(e){
+        if (this.rteLoaded && MODx.unloadRTE){
+            MODx.unloadRTE(this.rteElements);
+            this.rteLoaded = false;
+        }
     }
 
     ,beforeSubmit: function(o) {
@@ -110,6 +153,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         });
     }
     ,success: function(o) {
+        this.warnUnsavedChanges = false;
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');
@@ -124,20 +168,32 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 t.refresh();
                 Ext.getCmp('modx-resource-parent-old-hidden').setValue(pa);
             } else {
-                n.leaf = false;
+                if(typeof n!=="undefined"){
+                    n.leaf = false;
+                }
                 t.refreshNode(v,true);
             }
         }
-        if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
-            location.href = location.href;
-        } else if (o.result.object['parent'] != this.defaultValues['parent'] && this.config.resource != '' && this.config.resource != 0) {
-            location.href = location.href;
+        var object = o.result.object;
+        // object.parent is undefined on template changing.
+        if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
+            MODx.loadPage(location.href);
         } else {
-            this.getForm().setValues(o.result.object);
-            Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
+            if (object.deleted !== this.record.deleted) {
+                if (object.deleted) {
+                    var action = 'hide';
+                } else {
+                    action = 'show';
+                }
+                this.handlePreview(action);
+            }
+            this.record = object;
+            this.getForm().setValues(object);
+            Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
         }
     }
     ,failure: function(o) {
+        this.warnUnsavedChanges = true;
         if(this.getForm().baseParams.action == 'create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
@@ -163,9 +219,18 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     var nt = t.getValue();
                     var f = Ext.getCmp('modx-page-update-resource');
                     f.config.action = 'reload';
+                    this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.action[r.result.object.action]+'&id='+r.result.object.id+'&reload='+r.result.object.reload;
+                            var query = [
+                                'reload=' + r.result.object.reload
+                                ,'class_key=' + r.result.object.class_key
+                                ,'context_key=' + r.result.object.context_key
+                            ];
+                            if (r.result.object.id) {
+                                query.push('id=' + r.result.object.id);
+                            }
+                            MODx.loadPage(MODx.action[r.result.object.action], query.join('&'));
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -178,6 +243,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },this);
         }
     }
+    ,onFieldChange: function(o) {
+        if (o && o.field && o.field.name == 'syncsite') return;
+
+        if (this.isReady || MODx.request.reload) {
+            this.warnUnsavedChanges = true;
+        }
+    }
+
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('ta');
@@ -253,7 +326,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
         if (MODx.config.tvs_below_content == 1) {
             var tvs = this.getTemplateVariablesPanel(config);
-            tvs.style = 'margin-top: 10px';
             its.push(tvs);
         }
         return its;
@@ -280,6 +352,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,template: config.record.template
             ,anchor: '100%'
             ,border: true
+            ,bodyStyle: 'display: none'
         };
     }
 
@@ -574,6 +647,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.publishedon
         },{
             xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
@@ -587,6 +661,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.pub_date
         },{
             xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
@@ -600,6 +675,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,startDay: parseInt(MODx.config.manager_week_start)
             ,dateWidth: 120
             ,timeWidth: 120
+            ,offset_time: MODx.config.server_offset_time
             ,value: config.record.unpub_date
         },{
             xtype: 'fieldset'
@@ -733,7 +809,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
         } else {
             var contentField = {
-                xtype: 'modx-codearea'
+                xtype: 'modx-texteditor'
                 ,name: 'ta'
                 ,id: 'ta'
                 ,hideLabel: true

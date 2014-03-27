@@ -206,7 +206,7 @@ MODx.panel.Plugin = function(config) {
                 ,cls:'main-wrapper'
                 ,labelAlign: 'top'
                 ,items: [{
-                    xtype: 'modx-codearea'
+                    xtype: 'modx-texteditor'
                     ,fieldLabel: _('plugin_code')
                     ,name: 'plugincode'
                     ,id: 'modx-plugin-plugincode'

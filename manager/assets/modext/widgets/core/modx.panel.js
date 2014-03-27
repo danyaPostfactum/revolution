@@ -52,9 +52,10 @@ MODx.FormPanel = function(config) {
         success: true
         ,failure: true
     });
+    this.dropTargets = [];
     this.on('ready',this.onReady);
     if (this.config.useLoadingMask) {
-        this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+        this.mask = new Ext.LoadMask(this.getEl());
         this.mask.show();
     }
     if (this.fireEvent('setup',config)) {
@@ -145,20 +146,32 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 this.addChangeEvent(cmp.items);
             } else if (cmp.xtype) {
                 if (!cmp.listeners) { cmp.listeners = {}; }
-                var ctype = 'change';
+                var ctypes = ['change'];
                 cmp.enableKeyEvents = true;
                 switch (cmp.xtype) {
+                    case 'numberfield':
                     case 'textfield':
                     case 'textarea':
-                        ctype = 'keydown';
+                        ctypes = ['keydown', 'change'];
                         break;
                     case 'checkbox':
                     case 'xcheckbox':
                     case 'radio':
-                        ctype = 'check';
+                        ctypes = ['check'];
                         break;
                 }
-                cmp.listeners[ctype] = {fn:this.fieldChangeEvent,scope:this};
+                if (cmp.xtype && cmp.xtype.indexOf('modx-combo') == 0) {
+                    ctypes = ['select'];
+                }
+
+                var that = this;
+                Ext.iterate(ctypes, function(ctype) {
+                    if (cmp.listeners[ctype] && cmp.listeners[ctype].fn) {
+                        cmp.listeners[ctype] = {fn:that.fieldChangeEvent.createSequence(cmp.listeners[ctype].fn,cmp.listeners[ctype].scope),scope:that}
+                    } else {
+                        cmp.listeners[ctype] = {fn:that.fieldChangeEvent,scope:that};
+                    }
+                });
             }
         }
     }
@@ -198,16 +211,18 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,loadDropZones: function() {
+        var dropTargets = this.dropTargets;
         var flds = this.getForm().items;
         flds.each(function(fld) {
             if (fld.isFormField && !fld.readOnly && fld.isXType('textfield') && !fld.isXType('combo')) {
                 var el = fld.getEl();
                 if (el) {
-                    new MODx.load({
+                    var target = new MODx.load({
                         xtype: 'modx-treedrop'
                         ,target: fld
                         ,targetEl: el.dom
                     });
+                    dropTargets.push(target);
                 }
             }
         });
@@ -262,6 +277,13 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 f.label.update(v);
             }
         }
+    }
+
+    ,destroy: function() {
+        for (var i = 0; i < this.dropTargets.length; i++) {
+            this.dropTargets[i].destroy();
+        }
+        MODx.FormPanel.superclass.destroy.call(this);
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);

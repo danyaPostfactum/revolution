@@ -48,6 +48,7 @@ Ext.extend(MODx,Ext.Component,{
             beforeClearCache: true
             ,beforeLogout: true
             ,beforeReleaseLocks: true
+            ,beforeLoadPage: true
             ,afterClearCache: true
             ,afterLogout: true
             ,afterReleaseLocks: true
@@ -154,11 +155,6 @@ Ext.extend(MODx,Ext.Component,{
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'system/index.php'
             ,params: { action: 'clearCache',register: 'mgr' ,topic: topic }
-            ,listeners: {
-                'success':{fn:function() {
-                    this.console.fireEvent('complete');
-                },scope:this}
-            }
         });
         return true;
     }
@@ -226,7 +222,9 @@ Ext.extend(MODx,Ext.Component,{
             title: _('help')
             ,width: 850
             ,height: 500
-            ,modal: Ext.isIE ? false : true
+            ,resizable: true
+            ,maximizable: true
+            ,modal: false
             ,layout: 'fit'
             ,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
         });
@@ -627,7 +625,7 @@ MODx.HttpProvider = function(config) {
     );
     MODx.HttpProvider.superclass.constructor.call(this,config);
     Ext.apply(this, config, {
-        delay: 1000
+        delay: 500
         ,dirty: false
         ,started: false
         ,autoStart: true
@@ -655,7 +653,7 @@ MODx.HttpProvider = function(config) {
             ,poll_limit: 1
             ,poll_interval: 1
             ,time_limit: 10
-            ,message_limit: 200
+            ,message_limit: 1000
             ,remove_read: 0
             ,show_filename: 0
             ,include_keys: 1

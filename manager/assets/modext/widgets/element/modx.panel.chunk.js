@@ -195,7 +195,7 @@ MODx.panel.Chunk = function(config) {
                 ,cls:'main-wrapper'
                 ,labelAlign: 'top'
                 ,items: [{
-                    xtype: 'modx-codearea'
+                    xtype: 'modx-texteditor'
                     ,fieldLabel: _('chunk_code')
                     ,name: 'snippet'
                     ,id: 'modx-chunk-snippet'

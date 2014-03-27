@@ -28,9 +28,9 @@ $_lang['area_system'] = 'System and Server';
 $_lang['areas'] = 'Areas';
 $_lang['charset'] = 'Charset';
 $_lang['country'] = 'Country';
-$_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry key.';
+$_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
 $_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
-$_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry key.';
+$_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
 $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filter by namespace...';
@@ -92,8 +92,8 @@ $_lang['setting_allow_forward_across_contexts_desc'] = 'When true, Symlinks and 
 $_lang['setting_allow_manager_login_forgot_password'] = 'Allow Forgot Password in Manager Login Screen';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "No" will disable the forgot password ability on the manager login screen.';
 
-$_lang['setting_allow_tags_in_post'] = 'Allow HTML Tags in POST';
-$_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODX Recommends to leave this set at true.';
+$_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
+$_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
@@ -121,6 +121,9 @@ $_lang['setting_blocked_minutes_desc'] = 'Here you can enter the number of minut
 
 $_lang['setting_cache_action_map'] = 'Enable Action Map Cache';
 $_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller maps) will be cached to reduce manager page load times.';
+
+$_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
+$_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
 
 $_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
 $_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
@@ -193,6 +196,9 @@ $_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript
 $_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
 $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
+$_lang['setting_confirm_navigation'] = 'Confirm Navigation with unsaved changes';
+$_lang['setting_confirm_navigation_desc'] = 'When this is enabled, the user will be prompted to confirm their intention if there are unsaved changes.';
+
 $_lang['setting_container_suffix'] = 'Container Suffix';
 $_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
 
@@ -247,6 +253,9 @@ $_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and drop
 $_lang['setting_error_page'] = 'Error Page';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
+
+$_lang['setting_ext_debug'] = 'ExtJS debug';
+$_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to help debug your ExtJS code.';
 
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{path":"path/to/package"},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
@@ -604,6 +613,9 @@ $_lang['setting_session_cookie_path_desc'] = 'Use this setting to customize the 
 
 $_lang['setting_session_cookie_secure'] = 'Session Cookie Secure';
 $_lang['setting_session_cookie_secure_desc'] = 'Enable this setting to use secure session cookies.';
+
+$_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
+$_lang['setting_session_cookie_httponly_desc'] = 'Use this setting to set the HttpOnly flag on session cookies.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'modSessionHandler\'.';

@@ -1,5 +1,36 @@
 This file shows the changes in this release of xPDO.
 
+- Reject xPDOQuery conditions with SQL injection attempts
+- Resolve xPDO::parseBindings() error from /e modifier fix
+- Fix xPDO::getCount() to work with queries containing group by
+- Replace reflection of PHP_SELF with SCRIPT_NAME in xPDO::log()
+- Replace use of deprecated /e preg_replace modifier
+- Add dependency metadata/API to xPDOTransport
+
+xPDO 2.2.9-pl (September 12, 2013)
+====================================
+- Improve accuracy of query statistics
+- [#10183] Fix cache entry removal on xPDOObject::remove()
+
+xPDO 2.2.8-pl (August 26, 2013)
+====================================
+- [#9864] Identify compound PK's properly in xPDOQuery::parseConditions()
+
+xPDO 2.2.7-pl (April 9, 2013)
+====================================
+- [#9793] Preserve numeric keys in xPDOObject::getMany()
+
+xPDO 2.2.6-pl (March 16, 2013)
+====================================
+- [#7452] Fix sql errors with decimal fields in some locales
+- [#9062] Fix problem loading multiple xPDOQuery driver classes
+- [#9629] Fix notice in xPDOConnection::getOption() when $options not an array
+- [#9020] Prevent xPDOZip from attempting to add empty targets
+- [#9272] Implement NFS-safe flock-independent file locking
+- [#9020] Allow xPDOZip to pack empty directories
+- [#9023] Fix removal of subdirs when deleteTop = false in xPDOCacheManager::deleteTree()
+- [#8962] Prevent xPDOSimpleObject from overwriting xPDOObject map entry
+- [#8423] Fix tmpLockFile naming issue in xPDOCacheManager::lockFile()
 - [#8440] Add memcached implementation of xPDOCache (xPDOMemCached)
 - [#8423] Add flock-independent file locking to xPDOCacheManager::writeFile()
 - [#6930] Fix improper escaping of $ in parseBindings
